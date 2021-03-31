@@ -12,7 +12,7 @@ HttpRequest::HttpRequest(QObject *parent)
 void HttpRequest::replayFinished(QNetworkReply *reply)
 {
     QString all_result = reply->readAll();
-    //qDebug()<<all_result;
+    qDebug()<<all_result;
     reply->deleteLater();
 
     QJsonParseError error;
