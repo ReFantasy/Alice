@@ -48,13 +48,22 @@ Widget::Widget(QWidget *parent)
     // Tray Menu
     QMenu* tray_menu = new QMenu();
     tray_menu->addSeparator();
+
+    //preference
+    auto preference_action = new QAction(tray_menu);
+    preference_action->setText("Preference");
+    tray_menu->addAction(preference_action);
+    connect(preference_action, &QAction::triggered, this, &Widget::SetPreference);
+    // close app
     auto close_app_action = new QAction(tray_menu);
     close_app_action->setText("Quit");
     tray_menu->addAction(close_app_action);
     connect(close_app_action, &QAction::triggered, this, &Widget::CloseApp);
+
     systemTray->setContextMenu(tray_menu);
 
-    //preference
+
+
 
     // Connect Tray signals
     connect(systemTray, &QSystemTrayIcon::activated, this, &Widget::OnSystemTrayClicked);//点击托盘，执行相应的动作
@@ -119,6 +128,15 @@ void Widget::OnSystemTrayClicked(QSystemTrayIcon::ActivationReason reason)
 
 void Widget::CloseApp()
 {
+    systemTray->hide();
     exit(0);
+}
+
+#include <QDialog>
+
+void Widget::SetPreference()
+{
+    QDialog dlg(this);
+    dlg.exec();
 }
 

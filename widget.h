@@ -50,6 +50,11 @@ private slots:
      */
     void CloseApp();
 
+    /**
+     * @brief SetPreference 偏好设置
+     */
+    void SetPreference();
+
 private:
     Ui::Widget *ui;
     HttpRequest *hr;
