@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Images.qrc">
+    <normaloff>:/images/Images/application.png</normaloff>:/images/Images/application.png</iconset>
+  </property>
   <property name="toolTip">
    <string>请在剪切板复制(ctrl+c)要翻译内容</string>
   </property>
@@ -35,6 +39,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="Images.qrc"/>
+ </resources>
  <connections/>
 </ui>
