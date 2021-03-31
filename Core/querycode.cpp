@@ -1,10 +1,5 @@
 #include "querycode.h"
 
-QueryCode::QueryCode()
-{
-
-}
-
 unsigned int RandomUInt()
 {
     std::random_device device;

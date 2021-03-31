@@ -1,11 +1,11 @@
+#include <QNetworkAccessManager>
+#include <QClipboard>
+#include <QSettings>
+#include <QDebug>
+
 #include "widget.h"
 #include "ui_widget.h"
-#include <QDebug>
-#include <QtNetwork>
-#include <QUrl>
-#include <QString>
-#include <QJsonDocument>
-#include <QClipboard>
+
 #include "querycode.h"
 #include "httprequest.h"
 

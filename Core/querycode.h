@@ -4,12 +4,13 @@
 #include <QDebug>
 #include <QCryptographicHash>
 #include <random>
+
 unsigned int RandomUInt();
 
 class QueryCode
 {
 public:
-    QueryCode();
+    QueryCode()=default;
 
     QString Gen(QString from, QString to, QString query, QString appid, QString key)
     {

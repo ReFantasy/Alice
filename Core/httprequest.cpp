@@ -1,7 +1,7 @@
 #include "httprequest.h"
 
-HttpRequest::HttpRequest(QWidget *parent)
-    :QWidget(parent)
+HttpRequest::HttpRequest(QObject *parent)
+    :QObject(parent)
 {
     manager = new QNetworkAccessManager;
 

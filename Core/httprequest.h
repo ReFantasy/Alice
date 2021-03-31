@@ -2,18 +2,17 @@
 #define HTTPREQUEST_H
 
 #include <QObject>
-#include <QWidget>
 #include <QtNetwork>
 #include <QNetworkAccessManager>
-#include <QWidget>
+
 #include "querycode.h"
 
-class HttpRequest: public QWidget
+class HttpRequest: public QObject
 {
     Q_OBJECT
 
 public:
-    HttpRequest(QWidget *parent = nullptr);
+    HttpRequest(QObject *parent = nullptr);
     ~HttpRequest(){}
 
 
