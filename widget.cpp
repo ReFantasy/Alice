@@ -45,7 +45,6 @@ Widget::~Widget()
 
 void Widget::QueryDst(QString dst)
 {
-    //ui->label->setText(dst);
     ui->textEdit->setText(dst);
 }
 
