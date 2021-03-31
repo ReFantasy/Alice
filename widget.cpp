@@ -9,6 +9,11 @@
 
 #include "querycode.h"
 #include "httprequest.h"
+#include "preference.h"
+#include <QDialog>
+
+const unsigned int preference_widget_posx = 200;
+const unsigned int preference_widget_posy = 200;
 
 
 Widget::Widget(QWidget *parent)
@@ -19,6 +24,7 @@ Widget::Widget(QWidget *parent)
 
     setWindowTitle("Alice");
     setWindowFlag(Qt::WindowStaysOnTopHint,true);
+
 
     hr = new HttpRequest(this);
     connect(hr, &HttpRequest::QueryDst, this, &Widget::QueryDst);
@@ -47,13 +53,13 @@ Widget::Widget(QWidget *parent)
 
     // Tray Menu
     QMenu* tray_menu = new QMenu();
-    tray_menu->addSeparator();
 
     //preference
     auto preference_action = new QAction(tray_menu);
     preference_action->setText("Preference");
     tray_menu->addAction(preference_action);
     connect(preference_action, &QAction::triggered, this, &Widget::SetPreference);
+    tray_menu->addSeparator();
     // close app
     auto close_app_action = new QAction(tray_menu);
     close_app_action->setText("Quit");
@@ -62,12 +68,13 @@ Widget::Widget(QWidget *parent)
 
     systemTray->setContextMenu(tray_menu);
 
-
-
-
     // Connect Tray signals
     connect(systemTray, &QSystemTrayIcon::activated, this, &Widget::OnSystemTrayClicked);//点击托盘，执行相应的动作
     systemTray->show();
+
+    // Create Preference Dialog
+    preference = new Preference();
+    preference->Settings(this->settings);
 
 }
 
@@ -115,6 +122,7 @@ void Widget::OnSystemTrayClicked(QSystemTrayIcon::ActivationReason reason)
     case QSystemTrayIcon::Unknown: // 未知请求
         break;
     case QSystemTrayIcon::Context: // 请求托盘菜单
+
         break;
     case QSystemTrayIcon::Trigger: // 单击托盘
         this->showNormal();
@@ -132,11 +140,13 @@ void Widget::CloseApp()
     exit(0);
 }
 
-#include <QDialog>
+
 
 void Widget::SetPreference()
 {
-    QDialog dlg(this);
-    dlg.exec();
+
+    preference->move(preference_widget_posx,preference_widget_posy);
+    preference->show();
+
 }
 

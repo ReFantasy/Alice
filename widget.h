@@ -3,8 +3,10 @@
 
 #include <QWidget>
 #include <QSystemTrayIcon>
+#include "preference.h"
 
 class QSettings;
+class Preference;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -63,6 +65,9 @@ private:
 
     // 系统托盘
     QSystemTrayIcon *systemTray;
+
+    // Preference Dialog
+    Preference *preference;
 
 };
 #endif // WIDGET_H

@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 INCLUDEPATH += $$PWD/Core
 include($$PWD/Core/Core.pri)
+INCLUDEPATH += $$PWD/Preference
+include($$PWD/Preference/Preference.pri)
 
 SOURCES += \
     main.cpp \
