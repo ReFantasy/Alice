@@ -5,7 +5,6 @@ A simple translation software which is designed to the text copied in pdf.
 ## Build
 
 - Qt 5.14.2
-- Visual Studio 2017
 
 Open Alice.pro by QtCreator and build project.
 
