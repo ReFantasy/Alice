@@ -36,7 +36,7 @@ Widget::Widget(QWidget *parent)
 
     settings = new QSettings(QCoreApplication::applicationDirPath()+QString("/Alice.ini"),
                              QSettings::IniFormat);
-    qDebug()<<QCoreApplication::applicationDirPath();
+    //qDebug()<<QCoreApplication::applicationDirPath();
     if(settings->value("appid").isNull())
     {
         settings->setValue("appid", "your_appid");

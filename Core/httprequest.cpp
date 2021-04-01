@@ -12,15 +12,15 @@ HttpRequest::HttpRequest(QObject *parent)
 void HttpRequest::replayFinished(QNetworkReply *reply)
 {
     QString all_result = reply->readAll();
-    qDebug()<<all_result;
+    //qDebug()<<all_result;
     reply->deleteLater();
 
     QJsonParseError error;
     QJsonDocument document = QJsonDocument::fromJson(all_result.toUtf8(), &error);
     if(QJsonParseError::NoError == error.error)
     {
-        qDebug()<<document["from"];
-        qDebug()<<document["to"];
+        //qDebug()<<document["from"];
+        //qDebug()<<document["to"];
         auto trans_result = document["trans_result"];
         //qDebug()<<trans_result.isArray();
         auto arr = trans_result.toArray();
