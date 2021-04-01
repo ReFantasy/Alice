@@ -11,6 +11,7 @@
 #include "httprequest.h"
 #include "preference.h"
 #include <QDialog>
+#include "feature.h"
 
 const unsigned int preference_widget_posx = 200;
 const unsigned int preference_widget_posy = 200;
@@ -106,13 +107,17 @@ void Widget::QueryDst(QString dst)
 void Widget::ClipDataChanged()
 {
     QString str = clipboard->text().toLocal8Bit();
-    // 换行符替换为空格
-    QString str2 = str.replace(QRegExp("\\n"), " ");
+
+    // Process string
+    auto features = preference->Features();
+    for(auto f:features)
+    {
+        str = f->Process(str);
+    }
 
     QString appid = settings->value("appid").toString();
     QString key = settings->value("key").toString();
-    //qDebug()<<"clip content: "<<str2;
-    hr->Query("auto", "zh", str2, appid,key);
+    hr->Query("auto", "zh", str, appid,key);
 }
 
 void Widget::OnSystemTrayClicked(QSystemTrayIcon::ActivationReason reason)

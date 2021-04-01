@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QSettings>
+#include <vector>
+#include <memory>
+#include "feature.h"
 
 namespace Ui {
 class Preference;
@@ -21,9 +24,17 @@ public:
         settings = set;
     }
 
+    std::vector<std::shared_ptr<StringProcess>> Features()
+    {
+        std::shared_ptr<StringProcess> rld = std::make_shared<ReplaceLinefeed>();
+        features.push_back(rld);
+        return features;
+    }
+
 private:
     Ui::Preference *ui;
     QSettings *settings;
+    std::vector<std::shared_ptr<StringProcess>> features;
 
 };
 
