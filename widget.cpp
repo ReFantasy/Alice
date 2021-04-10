@@ -35,7 +35,7 @@ Widget::Widget(QWidget *parent)
 
     settings = new QSettings(QCoreApplication::applicationDirPath()+QString("/Alice.ini"),
                              QSettings::IniFormat);
-    //qDebug()<<QCoreApplication::applicationDirPath();
+
     if(settings->value("appid").isNull())
     {
         settings->setValue("appid", "your_appid");
@@ -105,13 +105,14 @@ void Widget::QueryDst(QString dst)
 
 void Widget::ClipDataChanged()
 {
-    QString str = clipboard->text().toLocal8Bit();
+    QString clip_str = clipboard->text().toUtf8();
 
-    QString str2 = str.replace(QRegExp(QString("\\n")), QChar('\0x20'));
+    // 空格替换换行符
+    QString replaced_str = clip_str.replace(QRegExp(QString("\\n")), QChar(32));
 
     QString appid = settings->value("appid").toString();
     QString key = settings->value("key").toString();
-    hr->Query("auto", "zh", str2, appid,key);
+    hr->Query("auto", "zh", replaced_str, appid,key);
 }
 
 void Widget::OnSystemTrayClicked(QSystemTrayIcon::ActivationReason reason)
@@ -143,9 +144,7 @@ void Widget::CloseApp()
 
 void Widget::SetPreference()
 {
-
     preference->move(preference_widget_posx,preference_widget_posy);
     preference->show();
-
 }
 
