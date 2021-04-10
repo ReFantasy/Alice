@@ -20,6 +20,9 @@
   <property name="toolTip">
    <string>请在剪切板复制(ctrl+c)要翻译内容</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QTextEdit" name="textEdit">
@@ -33,6 +36,9 @@
      </property>
      <property name="toolTip">
       <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
      <property name="readOnly">
       <bool>true</bool>

@@ -76,6 +76,9 @@ Widget::Widget(QWidget *parent)
     preference = new Preference();
     preference->Settings(this->settings);
 
+    // 文本显示控件样式设置
+    ui->textEdit->setStyleSheet(QString::fromUtf8("border:1px solid green;background-color: rgb(255, 255, 245)"));
+
 }
 
 Widget::~Widget()
