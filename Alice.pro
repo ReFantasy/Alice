@@ -37,3 +37,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     Images.qrc
+
+RC_FILE = $$PWD/Images/logo.rc
