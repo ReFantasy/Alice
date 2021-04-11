@@ -47,6 +47,8 @@ private slots:
      */
     void OnSystemTrayClicked(QSystemTrayIcon::ActivationReason reason);
 
+private:
+    void InitConfig();
     /**
      * @brief CloseApp 相应托盘动作，关闭应用
      */

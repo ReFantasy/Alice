@@ -29,7 +29,8 @@ QString BaiduEngine::WrapperAPIRequest(QString from, QString to, QString src_tex
 
     auto sign_byte = QCryptographicHash::hash(step1_byte,QCryptographicHash::Md5).toHex();
 
-    QString http = QString("http://api.fanyi.baidu.com/api/trans/vip/translate");
+    //QString http = QString("http://api.fanyi.baidu.com/api/trans/vip/translate");
+    QString http = QString("https://fanyi-api.baidu.com/api/trans/vip/translate");
     QString params = QString("?q=%1&from=%2&to=%3&appid=%4&salt=%5&sign=%6")
             .arg(query_byte.toPercentEncoding(),from_byte, to_byte, appid_byte, salt_byte, sign_byte);
 

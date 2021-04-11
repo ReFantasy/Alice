@@ -1,4 +1,4 @@
-#include <QNetworkAccessManager>
+﻿#include <QNetworkAccessManager>
 #include <QClipboard>
 #include <QSettings>
 #include <QDebug>
@@ -11,6 +11,7 @@
 #include "httprequest.h"
 #include "preference.h"
 #include <QDialog>
+#include <QScreen>
 
 const unsigned int preference_widget_posx = 200;
 const unsigned int preference_widget_posy = 200;
@@ -25,7 +26,9 @@ Widget::Widget(QWidget *parent)
     setWindowTitle("Alice");
     setWindowFlag(Qt::WindowStaysOnTopHint,true);
 
-
+    QScreen *screen=QGuiApplication::primaryScreen();
+    int screen_width = screen->availableGeometry().width();
+    this->resize(screen_width*0.25,screen_width*0.25*0.75);
 
 
     clipboard = QApplication::clipboard();
@@ -34,15 +37,8 @@ Widget::Widget(QWidget *parent)
 
     settings = new QSettings(QCoreApplication::applicationDirPath()+QString("/Alice.ini"),
                              QSettings::IniFormat);
+    InitConfig();
 
-    if(settings->value("appid").isNull())
-    {
-        settings->setValue("appid", "your_appid");
-    }
-    if(settings->value("key").isNull())
-    {
-        settings->setValue("key", "your_key");
-    }
 
     // set translation engine
     http_request = new HttpRequest(this);
@@ -80,12 +76,11 @@ Widget::Widget(QWidget *parent)
     systemTray->show();
 
     // Create Preference Dialog
-    preference = new Preference();
-    preference->Settings(this->settings);
+    preference = new Preference(nullptr, settings);
+    //preference->Settings(this->settings);
 
     // 文本显示控件样式设置
-    ui->textEdit->setStyleSheet(QString::fromUtf8("border:1px solid green;background-color: rgb(255, 255, 245)"));
-
+    ui->textEdit->setStyleSheet(QString::fromUtf8("border:1px solid green;background-color: rgb(250, 250, 250)"));
 }
 
 Widget::~Widget()
@@ -120,7 +115,7 @@ void Widget::ClipDataChanged()
     // 空格替换换行符
     QString replaced_str = clip_str.replace(QRegExp(QString("\\n")), QChar(32));
 
-    http_request->Translate("auto", "zh", replaced_str);
+    http_request->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
 }
 
 void Widget::OnSystemTrayClicked(QSystemTrayIcon::ActivationReason reason)
@@ -140,6 +135,28 @@ void Widget::OnSystemTrayClicked(QSystemTrayIcon::ActivationReason reason)
         break;
     }
 
+}
+
+void Widget::InitConfig()
+{
+    if(settings->value("appid").isNull())
+    {
+        settings->setValue("appid", "your_appid");
+    }
+    if(settings->value("key").isNull())
+    {
+        settings->setValue("key", "your_key");
+    }
+
+    qDebug()<<settings->value("from").toString();
+    if(settings->value("from").isNull())
+    {
+        settings->setValue("from", "auto");
+    }
+    if(settings->value("to").isNull())
+    {
+        settings->setValue("to", "zh");
+    }
 }
 
 void Widget::CloseApp()
