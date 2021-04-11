@@ -3,38 +3,26 @@
 HttpRequest::HttpRequest(QObject *parent)
     :QObject(parent)
 {
-    manager = new QNetworkAccessManager;
+    manager = new QNetworkAccessManager(this);
 
     connect(manager, &QNetworkAccessManager::finished,
-            this, &HttpRequest::replayFinished);
+            this, &HttpRequest::HttpRequestReplayFinished);
 }
 
-void HttpRequest::replayFinished(QNetworkReply *reply)
+void HttpRequest::SetTranslateEngine(std::shared_ptr<TranslateEngine> engine)
+{
+    _tranlation_engine = engine;
+}
+
+void HttpRequest::Translate(QString from, QString to, QString src_text)
+{
+    QString http_require_str = _tranlation_engine->WrapperAPIRequest(from, to, src_text);
+    manager->get(QNetworkRequest(QUrl(http_require_str)));
+}
+
+void HttpRequest::HttpRequestReplayFinished(QNetworkReply *reply)
 {
     QString all_result = reply->readAll();
-    //qDebug()<<all_result;
-    reply->deleteLater();
-
-    QJsonParseError error;
-    QJsonDocument document = QJsonDocument::fromJson(all_result.toUtf8(), &error);
-    if(QJsonParseError::NoError == error.error)
-    {
-        //qDebug()<<document["from"];
-        //qDebug()<<document["to"];
-        auto trans_result = document["trans_result"];
-        //qDebug()<<trans_result.isArray();
-        auto arr = trans_result.toArray();
-        auto res_array = *arr.begin();
-
-
-        auto res = res_array.toObject();
-        //qDebug()<<res["src"];
-        //qDebug()<<res["dst"].toString();
-        emit QueryDst(res["dst"].toString());
-        return;
-    }
-
-    //qDebug()<<"start emit signals";
-    emit QueryDst(QString(""));
-    return;
+    QString Translated_text = _tranlation_engine->ParseHttpReply(all_result);
+    emit TranslateFinished(Translated_text);
 }

@@ -31,9 +31,9 @@ public:
 
 private slots:
     /**
-     * @brief 查询结果槽函数
+     * @brief 接受翻译解雇槽函数
      */
-    void QueryDst(QString);
+    void ReceiveTranslatedResult(QString);
 
     /**
      * @brief 剪切板数据变化槽函数
@@ -59,7 +59,7 @@ private slots:
 
 private:
     Ui::Widget *ui;
-    HttpRequest *hr;
+    HttpRequest *http_request;
     QClipboard *clipboard;
     QSettings *settings;
 

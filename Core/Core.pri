@@ -1,7 +1,7 @@
 SOURCES += \
     $$PWD/httprequest.cpp \
-    $$PWD/querycode.cpp
+    $$PWD/translation.cpp
 
 HEADERS += \
     $$PWD/httprequest.h \
-    $$PWD/querycode.h
+    $$PWD/translation.h

@@ -7,7 +7,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 
-#include "querycode.h"
+#include "translation.h"
 #include "httprequest.h"
 #include "preference.h"
 #include <QDialog>
@@ -26,8 +26,7 @@ Widget::Widget(QWidget *parent)
     setWindowFlag(Qt::WindowStaysOnTopHint,true);
 
 
-    hr = new HttpRequest(this);
-    connect(hr, &HttpRequest::QueryDst, this, &Widget::QueryDst);
+
 
     clipboard = QApplication::clipboard();
     connect(clipboard, &QClipboard::dataChanged, this, &Widget::ClipDataChanged);
@@ -44,6 +43,14 @@ Widget::Widget(QWidget *parent)
     {
         settings->setValue("key", "your_key");
     }
+
+    // set translation engine
+    http_request = new HttpRequest(this);
+    connect(http_request, &HttpRequest::TranslateFinished, this, &Widget::ReceiveTranslatedResult);
+    std::shared_ptr<TranslateEngine> _tranlation_engine;
+    auto engine = std::make_shared<BaiduEngine>();
+    engine->SetIdKey(settings->value("appid").toString(), settings->value("key").toString());
+    http_request->SetTranslateEngine(engine);
 
     // SystemTray Setting
     systemTray = new QSystemTrayIcon(this);
@@ -101,9 +108,9 @@ void Widget::closeEvent(QCloseEvent *event)
 
 }
 
-void Widget::QueryDst(QString dst)
+void Widget::ReceiveTranslatedResult(QString trans_result)
 {
-    ui->textEdit->setText(dst);
+    ui->textEdit->setText(trans_result);
 }
 
 void Widget::ClipDataChanged()
@@ -113,9 +120,7 @@ void Widget::ClipDataChanged()
     // 空格替换换行符
     QString replaced_str = clip_str.replace(QRegExp(QString("\\n")), QChar(32));
 
-    QString appid = settings->value("appid").toString();
-    QString key = settings->value("key").toString();
-    hr->Query("auto", "zh", replaced_str, appid,key);
+    http_request->Translate("auto", "zh", replaced_str);
 }
 
 void Widget::OnSystemTrayClicked(QSystemTrayIcon::ActivationReason reason)
