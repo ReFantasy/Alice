@@ -76,8 +76,8 @@ Widget::Widget(QWidget *parent)
     systemTray->show();
 
     // Create Preference Dialog
-    preference = new Preference(nullptr, settings);
-    //preference->Settings(this->settings);
+    preference = new Preference(nullptr);
+    preference->Settings(this->settings);
 
     // 文本显示控件样式设置
     ui->textEdit->setStyleSheet(QString::fromUtf8("border:1px solid green;background-color: rgb(250, 250, 250)"));
@@ -148,7 +148,7 @@ void Widget::InitConfig()
         settings->setValue("key", "your_key");
     }
 
-    qDebug()<<settings->value("from").toString();
+
     if(settings->value("from").isNull())
     {
         settings->setValue("from", "auto");
@@ -157,6 +157,7 @@ void Widget::InitConfig()
     {
         settings->setValue("to", "zh");
     }
+    settings->sync();
 }
 
 void Widget::CloseApp()

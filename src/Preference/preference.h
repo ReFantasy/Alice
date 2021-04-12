@@ -1,4 +1,4 @@
-﻿#ifndef PREFERENCE_H
+#ifndef PREFERENCE_H
 #define PREFERENCE_H
 
 #include <QWidget>
@@ -16,13 +16,9 @@ class Preference : public QWidget
 
 public:
     explicit Preference(QWidget *parent = nullptr);
-    explicit Preference(QWidget *parent = nullptr, QSettings *set=nullptr);
     ~Preference();
 
-    void Settings(QSettings *set)
-    {
-        settings = set;
-    }
+    void Settings(QSettings *set);
 
 
 private slots:
