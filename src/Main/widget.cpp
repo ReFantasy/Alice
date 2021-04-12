@@ -26,9 +26,9 @@ Widget::Widget(QWidget *parent)
     setWindowTitle("Alice");
     setWindowFlag(Qt::WindowStaysOnTopHint,true);
 
-    QScreen *screen=QGuiApplication::primaryScreen();
-    int screen_width = screen->availableGeometry().width();
-    this->resize(screen_width*0.25,screen_width*0.25*0.75);
+//    QScreen *screen=QGuiApplication::primaryScreen();
+//    int screen_width = screen->availableGeometry().width();
+//    this->resize(screen_width*0.25,screen_width*0.25*0.75);
 
 
     clipboard = QApplication::clipboard();

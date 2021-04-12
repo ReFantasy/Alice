@@ -60,17 +60,11 @@ Preference::Preference(QWidget* parent /*= nullptr*/, QSettings* set /*= nullptr
 		ui->com_target->addItem(e.second);
 	}
 
-	/*for (const auto e : _languages)
-	{
-		if (e.second == from)
-		{
-			ui->com_src->setCurrentText(e.first.toLocal8Bit());
-		}
-		if (e.second == to)
-		{
-			ui->com_target->setCurrentText(e.first.toLocal8Bit());
-		}
-	}*/
+    // target language should not be auto.
+    ui->com_target->removeItem(ui->com_target->findText(QString("自动检测")));
+
+
+
 	auto iter1 = _languages.find(from);
 	auto iter2 = _languages.find(to);
 	ui->com_src->setCurrentText(iter1->second);
