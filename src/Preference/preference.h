@@ -16,6 +16,7 @@ class Preference : public QWidget
 
 public:
     explicit Preference(QWidget *parent = nullptr);
+    explicit Preference(QWidget* parent = nullptr, QSettings *set = nullptr);
     ~Preference();
 
     void Settings(QSettings *set);

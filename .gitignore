@@ -1,3 +1,5 @@
 build*
 Alice.pro.user*
 src/Alice.pro.user*
+src/build*
+src/Main/Alice.pro.user*
