@@ -12,6 +12,7 @@
 #include "preference.h"
 #include <QDialog>
 #include <QScreen>
+#include <QRegularExpression>
 
 const unsigned int preference_widget_posx = 200;
 const unsigned int preference_widget_posy = 200;
@@ -112,8 +113,8 @@ void Widget::ClipDataChanged()
 {
     QString clip_str = clipboard->text().toUtf8();
 
-    // 空格替换换行符
-    QString replaced_str = clip_str.replace(QRegExp(QString("\\n")), QChar(32));
+    // 空格替换换行符 QRegularExpression
+    QString replaced_str = clip_str.replace(QRegularExpression(QString("\\n")), QChar(32));
 
     http_request->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
 }
@@ -147,7 +148,7 @@ void Widget::InitConfig()
     {
         settings->setValue("key", "your_key");
     }
-
+    qDebug()<<settings->value("appid").toString();
 
     if(settings->value("from").isNull())
     {
