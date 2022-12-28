@@ -13,3 +13,4 @@ Open Alice.pro by QtCreator and build project.
 1. Register Baidu translation developer account [Click here](https://ripperhe.gitee.io/bob/#/service/translate/baidu)
 2. Fill in the account ID and key in the Alice.ini 
 
+.
