@@ -1,18 +1,16 @@
-#ifndef QUERYCODE_H
-#define QUERYCODE_H
-#include <QString>
-#include <QDebug>
+#pragma once
 #include <QCryptographicHash>
-#include <random>
-#include <QJsonDocument>
+#include <QDebug>
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
-
-unsigned int RandomUInt();
+#include <QString>
+#include <QUuid>
+#include <random>
 
 class TranslateEngine
 {
-public:
+  public:
     /**
      * @brief SetIdKey 设置翻译引擎的ID和密钥
      * @param eng_id
@@ -37,21 +35,16 @@ public:
      */
     virtual QString ParseHttpReply(QString http_reply) = 0;
 
-protected:
+    // protected:
     QString _id;
     QString _key;
+    QUuid _uuid;
 };
 
-class BaiduEngine:public TranslateEngine
+class BaiduEngine : public TranslateEngine
 {
-public:
-    bool SetIdKey(QString eng_id, QString eng_key)override;
-    QString WrapperAPIRequest(QString from, QString to, QString src_text)override;
-
+  public:
+    bool SetIdKey(QString eng_id, QString eng_key) override;
+    QString WrapperAPIRequest(QString from, QString to, QString src_text) override;
     QString ParseHttpReply(QString http_reply) override;
 };
-
-
-
-
-#endif // QUERYCODE_H
