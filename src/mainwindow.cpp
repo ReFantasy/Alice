@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         QString clip_str = clipboard->text().toUtf8();
         // 空格替换换行符 QRegularExpression
         QString replaced_str = clip_str.replace(QRegularExpression(QString("\\n")), QChar(32));
+        replaced_str = replaced_str.replace(QRegularExpression(QString("\\r")), QChar(32));
         engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
     });
 
