@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "interface.h"
+#include "translate_engine/interface.h"
 #include <QCloseEvent>
 #include <QDebug>
 #include <QGraphicsOpacityEffect>
