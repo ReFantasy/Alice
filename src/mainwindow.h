@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "Preference/preference.h"
-#include "interface.h"
+#include "translate_engine/interface.h"
 #include <QClipboard>
 #include <QMainWindow>
 #include <QSettings>
