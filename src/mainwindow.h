@@ -28,6 +28,9 @@ class MainWindow : public QMainWindow
      */
     void closeEvent(QCloseEvent *event) override;
 
+  protected:
+    void mouseReleaseEvent(QMouseEvent *event) override;
+
   private slots:
     /**
      * @brief 接受翻译解雇槽函数

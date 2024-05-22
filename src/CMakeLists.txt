@@ -3,6 +3,8 @@ set(PROJECT_SOURCES
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    globalapp.h
+    globalapp.cpp
     resource.qrc
 )
 if(APPLE)

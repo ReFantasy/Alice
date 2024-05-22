@@ -4,6 +4,7 @@
 #include <QCloseEvent>
 #include <QDebug>
 #include <QGraphicsOpacityEffect>
+#include <string>
 
 #ifdef __APPLE__
 #include "global_clipboard_message_for_mac.h"
@@ -73,6 +74,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
         // event->accept();
         QMainWindow::closeEvent(event);
     }
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+    // qDebug()<<"ok";
+    static int n = 0;
+    ui->textEdit->setText(QString(std::to_string(n).c_str()));
+    n++;
 }
 
 void MainWindow::ReceiveTranslatedResult(QString trans_result)
