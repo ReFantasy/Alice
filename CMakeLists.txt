@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 
 project(AliceTranslation VERSION 0.1 LANGUAGES CXX)
 
+# 设置编译命令导出选项 for neovim and clangd
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
