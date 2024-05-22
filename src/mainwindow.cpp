@@ -12,7 +12,6 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    // qDebug() << QSqlDatabase::drivers();
 
     setWindowFlag(Qt::WindowStaysOnTopHint, true);
     QStatusBar *statusbar = new QStatusBar(this);
@@ -32,13 +31,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // create an default translation engine
     auto engine = std::make_shared<BaiduEngine>();
+    // set key and id of translation engine
     engine->SetIdKey("20210330000753038", "l5ddAZlgKFfkd6sgR_Oy");
+    // create translation interface
     engine_interface = new EngineInterface();
     engine_interface->SetTranslateEngine(engine);
     connect(engine_interface, &EngineInterface::TranslateFinished, this, &MainWindow::ReceiveTranslatedResult);
 
     // 剪切板内容变化时自动将文本传递给翻译引擎
-    connect(clipboard, &QClipboard::dataChanged, this, [this]() {
+    connect(clipboard, &QClipboard::dataChanged, this, [this]() 
+    {
         QString clip_str = clipboard->text().toUtf8();
         // 空格替换换行符 QRegularExpression
         QString replaced_str = clip_str.replace(QRegularExpression(QString("\\n")), QChar(32));
