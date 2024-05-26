@@ -3,7 +3,7 @@
 
 const QString WINDOW_TITLE("Alice Translation");
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) 
 {
     QApplication app(argc, argv);
 
