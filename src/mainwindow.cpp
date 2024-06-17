@@ -40,8 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(engine_interface, &EngineInterface::TranslateFinished, this, &MainWindow::ReceiveTranslatedResult);
 
     // 剪切板内容变化时自动将文本传递给翻译引擎
-    connect(clipboard, &QClipboard::dataChanged, this, [this]() 
-    {
+    connect(clipboard, &QClipboard::dataChanged, this, [this]() {
         QString clip_str = clipboard->text().toUtf8();
         // 空格替换换行符 QRegularExpression
         QString replaced_str = clip_str.replace(QRegularExpression(QString("\\n")), QChar(32));
@@ -134,6 +133,9 @@ void MainWindow::InitSystemTray()
             // this->showNormal();
             break;
         case QSystemTrayIcon::DoubleClick: // 双击托盘
+            this->showNormal();
+            break;
+        case QSystemTrayIcon::MiddleClick: // 双击托盘
             this->showNormal();
             break;
         }
