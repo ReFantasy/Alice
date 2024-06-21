@@ -63,16 +63,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    if (systemTray->isVisible())
-    {
-        this->hide();
-        event->ignore();
-    }
-    else
-    {
-        // event->accept();
-        QMainWindow::closeEvent(event);
-    }
+    /*if (systemTray->isVisible())*/
+    /*{*/
+    /*    this->hide();*/
+    /*    event->ignore();*/
+    /*}*/
+    /*else*/
+    /*{*/
+    /*    // event->accept();*/
+    /*    QMainWindow::closeEvent(event);*/
+    /*}*/
+    QMainWindow::closeEvent(event);
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *event)
