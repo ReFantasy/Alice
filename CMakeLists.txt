@@ -25,5 +25,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa -framework AppKit -framework CoreDa
 #link_libraries(ssl crypto)
 ENDIF ()
 
+
+add_subdirectory(third_party/QHotkey)
 add_subdirectory(src)
 

@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 
     MainWindow main_window;
     main_window.setWindowTitle(WINDOW_TITLE);
+
     main_window.show();
 
     return app.exec();

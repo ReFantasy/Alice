@@ -6,6 +6,8 @@
 #include <QMainWindow>
 #include <QSettings>
 #include <QSystemTrayIcon>
+#include <QHotkey>
+#include <qapplication.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -28,6 +30,10 @@ class MainWindow : public QMainWindow
      */
     void closeEvent(QCloseEvent *event) override;
 
+    QHotkey *hotkey;
+
+    void ReceiveShort();
+
   protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
 
@@ -36,6 +42,7 @@ class MainWindow : public QMainWindow
      * @brief 接受翻译解雇槽函数
      */
     void ReceiveTranslatedResult(QString);
+
 
   private:
     void InitSystemTray();
