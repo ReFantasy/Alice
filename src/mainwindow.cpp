@@ -50,16 +50,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         replaced_str = replaced_str.replace(QRegularExpression(QString("\\r")), QChar(32));
         engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
     });
-
-    /*static QHotkey hotkey(QKeySequence("Ctrl+Alt+q"), true,  this); // The
-     * hotkey will be automatically registered*/
-    /*hotkey =  QHotkey(QKeySequence("Ctrl+Alt+q"), true,  this); // The hotkey
-     * will be automatically registered*/
-    hotkey = new QHotkey(QKeySequence("Alt+d"), true, this);
-    qDebug() << "Is segistered:" << hotkey->isRegistered();
-
-    QObject::connect(hotkey, &QHotkey::activated, this, &MainWindow::ReceiveShort);
-
+    
 #ifdef __APPLE__
     SetQtClipboard(clipboard);
 #endif
@@ -100,13 +91,6 @@ void MainWindow::ReceiveTranslatedResult(QString trans_result)
 {
     ui->textEdit->setText(trans_result);
     // qDebug() << trans_result;
-}
-
-void MainWindow::ReceiveShort()
-{
-    qDebug() << "Hotkey Activated - the application will quit now";
-    /*ui->textEdit->setText("Hotkey Activated - the application will quit now");*/
-    /*clipboard->setText(QString(std::to_string(120).c_str()));*/
 }
 
 void MainWindow::InitSystemTray()
