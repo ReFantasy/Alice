@@ -14,8 +14,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core Gui Widgets Network)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Gui Widgets Network)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Concurrent)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Gui Widgets Network Concurrent)
 
 IF (APPLE)
 add_compile_options(-x objective-c++)
@@ -25,7 +25,5 @@ set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa -framework AppKit -framework CoreDa
 #link_libraries(ssl crypto)
 ENDIF ()
 
-
-add_subdirectory(third_party/QHotkey)
 add_subdirectory(src)
 

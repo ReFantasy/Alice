@@ -4,11 +4,10 @@
 #include <QCloseEvent>
 #include <QDebug>
 #include <QGraphicsOpacityEffect>
+#include <qprocess.h>
 #include <string>
 
-#include <QDebug>
-#include <QHotkey>
-
+#include "QProcess"
 #ifdef __APPLE__
 #include "global_clipboard_message_for_mac.h"
 #endif
@@ -50,15 +49,27 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         replaced_str = replaced_str.replace(QRegularExpression(QString("\\r")), QChar(32));
         engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
     });
-    
+
 #ifdef __APPLE__
     SetQtClipboard(clipboard);
 #endif
 
     // 文本显示控件样式设置
     ui->textEdit->setStyleSheet(QString::fromUtf8("border:1px solid green;background-color: rgb(250, 250, 250)"));
-}
 
+    static EventMonitor monitor;
+    connect(&monitor, &EventMonitor::LeftButtonRelease, this, &MainWindow::buttonEvent);
+    monitor.start();
+}
+void MainWindow::buttonEvent()
+{
+    /*qDebug() << "b";*/
+    /*QProcess process;*/
+    /*process.start("xclip -o > a.txt");*/
+    /*process.waitForFinished();*/
+    /*qDebug(process.readAllStandardOutput());*/
+    qDebug()<<clipboard->text(QClipboard::Selection);
+}
 MainWindow::~MainWindow()
 {
     delete ui;
