@@ -44,6 +44,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // 剪切板内容变化时自动将文本传递给翻译引擎
     connect(clipboard, &QClipboard::dataChanged, this, [this]() {
         QString clip_str = clipboard->text().toUtf8();
+        if (clip_str.isEmpty())
+            return;
         // 空格替换换行符 QRegularExpression
         QString replaced_str = clip_str.replace(QRegularExpression(QString("\\n")), QChar(32));
         replaced_str = replaced_str.replace(QRegularExpression(QString("\\r")), QChar(32));
@@ -52,6 +54,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(clipboard, &QClipboard::selectionChanged, this, [this]() {
         QString clip_str = clipboard->text(QClipboard::Selection).toUtf8();
+        if (clip_str.isEmpty())
+            return;
         QString replaced_str = clip_str.replace(QRegularExpression(QString("\\n")), QChar(32));
         replaced_str = replaced_str.replace(QRegularExpression(QString("\\r")), QChar(32));
         engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
