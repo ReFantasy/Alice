@@ -8,7 +8,6 @@
 #include <QSystemTrayIcon>
 #include <qapplication.h>
 #include <qevent.h>
-#include "GlobalEvent/monitor_event.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -25,23 +24,13 @@ class MainWindow : public QMainWindow
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    /**
-     * @brief 点击红叉时隐藏主界面
-     * @param event
-     */
     void closeEvent(QCloseEvent *event) override;
-
-  protected:
-    void mouseReleaseEvent(QMouseEvent *event) override;
 
   private slots:
     /**
      * @brief 接受翻译解雇槽函数
      */
     void ReceiveTranslatedResult(QString);
-
-    void buttonEvent() ;
-
 
   private:
     void InitSystemTray();

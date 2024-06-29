@@ -50,6 +50,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
     });
 
+    connect(clipboard, &QClipboard::selectionChanged, this, [this]() {
+        QString clip_str = clipboard->text(QClipboard::Selection).toUtf8();
+        QString replaced_str = clip_str.replace(QRegularExpression(QString("\\n")), QChar(32));
+        replaced_str = replaced_str.replace(QRegularExpression(QString("\\r")), QChar(32));
+        engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
+    });
+
 #ifdef __APPLE__
     SetQtClipboard(clipboard);
 #endif
@@ -57,18 +64,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // 文本显示控件样式设置
     ui->textEdit->setStyleSheet(QString::fromUtf8("border:1px solid green;background-color: rgb(250, 250, 250)"));
 
-    static EventMonitor monitor;
-    connect(&monitor, &EventMonitor::LeftButtonRelease, this, &MainWindow::buttonEvent);
-    monitor.start();
-}
-void MainWindow::buttonEvent()
-{
-    /*qDebug() << "b";*/
-    /*QProcess process;*/
-    /*process.start("xclip -o > a.txt");*/
-    /*process.waitForFinished();*/
-    /*qDebug(process.readAllStandardOutput());*/
-    qDebug()<<clipboard->text(QClipboard::Selection);
+    /*static EventMonitor monitor;*/
+    /*connect(&monitor, &EventMonitor::LeftButtonRelease, this,
+     * &MainWindow::buttonEvent);*/
+    /*monitor.start();*/
 }
 MainWindow::~MainWindow()
 {
@@ -88,14 +87,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
     /*    QMainWindow::closeEvent(event);*/
     /*}*/
     QMainWindow::closeEvent(event);
-}
-
-void MainWindow::mouseReleaseEvent(QMouseEvent *event)
-{
-    // qDebug()<<"ok";
-    static int n = 0;
-    ui->textEdit->setText(QString(std::to_string(n).c_str()));
-    n++;
 }
 
 void MainWindow::ReceiveTranslatedResult(QString trans_result)
