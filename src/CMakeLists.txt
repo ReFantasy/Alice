@@ -5,11 +5,6 @@ set(PROJECT_SOURCES
     mainwindow.ui
     resource.qrc
 )
-if(APPLE)
-    list(APPEND PROJECT_SOURCES global_clipboard_message_for_mac.h)
-    list(APPEND PROJECT_SOURCES global_clipboard_message_for_mac.mm)
-endif()
-
 
 add_subdirectory(GlobalEvent)
 add_subdirectory(translate_engine)
@@ -36,4 +31,3 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(${PROJECT_NAME})
 endif()
-

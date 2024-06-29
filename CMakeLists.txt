@@ -17,13 +17,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Concurrent)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Gui Widgets Network Concurrent)
 
-IF (APPLE)
-add_compile_options(-x objective-c++)
-set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa -framework AppKit -framework CoreData -framework Foundation")
-#include_directories("/opt/homebrew/opt/openssl@1.1/include")
-#link_directories("/opt/homebrew/opt/openssl@1.1/lib")
-#link_libraries(ssl crypto)
-ENDIF ()
-
 add_subdirectory(src)
-
