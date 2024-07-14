@@ -1,26 +1,25 @@
 #include "mainwindow.h"
 #include "QProcess"
 #include "QStatusBar"
+#include "QVBoxLayout"
 #include "translate_engine/interface.h"
 #include <QGraphicsOpacityEffect>
 #include <qprocess.h>
-#include "QVBoxLayout"
+#include <qwidget.h>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-    // new all variable
     engine_interface = new EngineInterface(this);
     settings = new QSettings(this);
-    textEdit = new QTextEdit(this);
 
-    auto layout = new QVBoxLayout(this);
-    layout->setDirection(QBoxLayout::BottomToTop);
+    auto centralwidget = new QWidget(this);
+    textEdit = new QTextEdit(centralwidget);
+    textEdit->setReadOnly(true);
+    auto layout = new QVBoxLayout(centralwidget);
     layout->addWidget(textEdit);
-    /*this->setLayout(layout);*/
-    this->centralWidget()
-    
 
-    /*ui->setupUi(this);*/
+    layout->addWidget(textEdit);
+    this->setCentralWidget(centralwidget);
 
     setWindowFlag(Qt::WindowStaysOnTopHint, true);
     this->statusBar()->hide();
