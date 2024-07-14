@@ -4,6 +4,11 @@ set(PROJECT_SOURCES
     mainwindow.h
 )
 
+if(APPLE)
+    list(APPEND PROJECT_SOURCES ./Platform/global_clipboard_message_for_mac.h)
+    list(APPEND PROJECT_SOURCES ./Platform/global_clipboard_message_for_mac.mm)
+endif()
+
 add_subdirectory(translate_engine)
 add_subdirectory(Preference)
 

@@ -7,6 +7,10 @@
 #include <qprocess.h>
 #include <qwidget.h>
 
+#ifdef __APPLE__
+#include "Platform/global_clipboard_message_for_mac.h"
+#endif
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     engine_interface = new EngineInterface(this);
@@ -55,6 +59,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
         replaced_str = replaced_str.replace(QRegularExpression(QString("\\r")), QChar(32));
         engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
     });
+
+#ifdef __APPLE__
+    SetQtClipboard(clipboard);
+#endif
 }
 
 void MainWindow::ShowTranslatedResult(QString trans_result)
