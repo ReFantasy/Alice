@@ -50,3 +50,4 @@ install/
 ext/
 
 imgui.ini
+.qt/
