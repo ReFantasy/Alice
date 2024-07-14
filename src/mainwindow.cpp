@@ -4,6 +4,7 @@
 #include "translate_engine/interface.h"
 #include <QGraphicsOpacityEffect>
 #include <qprocess.h>
+#include "QVBoxLayout"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -12,10 +13,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     settings = new QSettings(this);
     textEdit = new QTextEdit(this);
 
+    auto layout = new QVBoxLayout(this);
+    layout->setDirection(QBoxLayout::BottomToTop);
+    layout->addWidget(textEdit);
+    /*this->setLayout(layout);*/
+    this->centralWidget()
+    
+
     /*ui->setupUi(this);*/
 
     setWindowFlag(Qt::WindowStaysOnTopHint, true);
     this->statusBar()->hide();
+    this->resize(600, 500);
 
     settings->setValue("from", "auto");
     settings->setValue("to", "zh");
