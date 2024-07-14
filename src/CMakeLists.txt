@@ -16,7 +16,9 @@ endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui
                       Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Network Qt6::Concurrent 
-                      engine preference  X11 Xtst )
+                      engine preference  
+                      #X11 Xtst 
+                      )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER refantasy.cn
