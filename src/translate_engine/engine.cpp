@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "random"
 
 unsigned int RandomUInt()
 {
@@ -7,14 +8,20 @@ unsigned int RandomUInt()
     return rng();
 }
 
-bool BaiduEngine::SetIdKey(QString eng_id, QString eng_key)
+bool TranslateEngine::SetIdKey(QString eng_id, QString eng_key)
 {
     _id = eng_id;
     _key = eng_key;
-    _uuid = QUuid::createUuid();
-    // qDebug() << "uuid: " << _uuid.toString().remove("{").remove("}").remove("-").toUpper();
-    //  TODO 验证账号
     return true;
+}
+
+//----------------------------------------------------------------------------------------
+//    
+//----------------------------------------------------------------------------------------
+
+bool BaiduEngine::SetIdKey(QString eng_id, QString eng_key)
+{
+    return TranslateEngine::SetIdKey(eng_id, eng_key);
 }
 
 QString BaiduEngine::WrapperAPIRequest(QString from, QString to, QString src_text)

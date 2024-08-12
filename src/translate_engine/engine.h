@@ -5,8 +5,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QString>
-#include <QUuid>
-#include <random>
 
 class TranslateEngine
 {
@@ -17,10 +15,10 @@ class TranslateEngine
      * @param eng_key
      * @return
      */
-    virtual bool SetIdKey(QString eng_id, QString eng_key) = 0;
+    virtual bool SetIdKey(QString eng_id, QString eng_key);
 
     /**
-     * @brief WrapperAPIRequest 根据翻译引擎API生成Http请求
+     * @brief WrapperAPIRequest 生成Http请求
      * @param from 源文本语言
      * @param to 目标语言
      * @param text 待翻译文本
@@ -29,16 +27,15 @@ class TranslateEngine
     virtual QString WrapperAPIRequest(QString from, QString to, QString text) = 0;
 
     /**
-     * @brief ParseHttpReply 解析Http请求的翻译结果
+     * @brief ParseHttpReply 解析翻译结果
      * @param http_reply 请求返回的字符串
      * @return 翻译结果
      */
     virtual QString ParseHttpReply(QString http_reply) = 0;
 
-    // protected:
+  protected:
     QString _id;
     QString _key;
-    QUuid _uuid;
 };
 
 class BaiduEngine : public TranslateEngine
