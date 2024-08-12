@@ -23,5 +23,3 @@ set(CMAKE_EXE_LINKER_FLAGS "-framework Cocoa -framework AppKit -framework CoreDa
 ENDIF ()
 
 add_subdirectory(src)
-
-
