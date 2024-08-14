@@ -2,7 +2,7 @@
 #include "QProcess"
 #include "QStatusBar"
 #include "QVBoxLayout"
-#include "translate_engine/interface.h"
+#include "interface.h"
 #include <QGraphicsOpacityEffect>
 #include <qprocess.h>
 #include <qwidget.h>

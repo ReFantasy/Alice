@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "translate_engine/interface.h"
+#include "interface.h"
 #include <QClipboard>
 #include <QMainWindow>
 #include <QSettings>
