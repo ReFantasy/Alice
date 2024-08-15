@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     layout->addWidget(textEdit);
     this->setCentralWidget(centralwidget);
 
-    setWindowFlag(Qt::WindowStaysOnTopHint, true);
+    /*setWindowFlag(Qt::WindowStaysOnTopHint, true);*/
     this->statusBar()->hide();
     this->resize(600, 500);
 
