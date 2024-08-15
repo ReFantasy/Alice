@@ -1,6 +1,5 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "interface.h"
 #include <QClipboard>
 #include <QMainWindow>
 #include <QSettings>
@@ -9,20 +8,22 @@
 #include <qapplication.h>
 #include <qevent.h>
 
+class EngineInterface;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-  public:
+public:
     MainWindow(QWidget *parent = nullptr);
 
-  private slots:
+private slots:
     void ShowTranslatedResult(QString);
 
-  private:
+private:
     EngineInterface *engine_interface;
 
-  private:
+private:
     QTextEdit *textEdit;
     QSettings *settings;
 };
