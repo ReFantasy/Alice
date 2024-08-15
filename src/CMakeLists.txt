@@ -4,8 +4,8 @@ add_subdirectory(Preference)
 set(PROJECT_SOURCES main.cpp mainwindow.cpp mainwindow.h)
 
 if(APPLE)
-  list(APPEND PROJECT_SOURCES ./Platform/global_clipboard_message_for_mac.h)
-  list(APPEND PROJECT_SOURCES ./Platform/global_clipboard_message_for_mac.mm)
+    list(APPEND PROJECT_SOURCES ./Platform/global_clipboard_message_for_mac.h)
+    list(APPEND PROJECT_SOURCES ./Platform/global_clipboard_message_for_mac.mm)
 endif()
 
 qt_add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
