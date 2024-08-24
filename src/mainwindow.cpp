@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     engine_interface = new EngineInterface(this);
     settings = new QSettings(this);
 
+
     auto centralwidget = new QWidget(this);
     textEdit = new QTextEdit(centralwidget);
     textEdit->setReadOnly(true);
@@ -59,9 +60,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
         replaced_str = replaced_str.replace(QRegularExpression(QString("\\r")), QChar(32));
         engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
     });
-
 #ifdef __APPLE__
-    SetQtClipboard(clipboard);
+    SetQtClipboard(clipboard)  ;
 #endif
 }
 
