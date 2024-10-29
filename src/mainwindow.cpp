@@ -3,9 +3,11 @@
 #include "QStatusBar"
 #include "QVBoxLayout"
 #include "interface.h"
+#include <QFont>
 #include <QGraphicsOpacityEffect>
 #include <qprocess.h>
 #include <qwidget.h>
+#include <QFontDialog>
 
 #ifdef __APPLE__
 #include "Platform/global_clipboard_message_for_mac.h"
@@ -16,10 +18,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     engine_interface = new EngineInterface(this);
     settings = new QSettings(this);
 
-
     auto centralwidget = new QWidget(this);
     textEdit = new QTextEdit(centralwidget);
     textEdit->setReadOnly(true);
+    font = QFont("AR PL KaitiM GB Regular");
+    // QFontDialog fontDialog;
+    // fontDialog.exec();;
+    textEdit->setFont(font);
     auto layout = new QVBoxLayout(centralwidget);
     layout->addWidget(textEdit);
 
@@ -61,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
         engine_interface->Translate(settings->value("from").toString(), settings->value("to").toString(), replaced_str);
     });
 #ifdef __APPLE__
-    SetQtClipboard(clipboard)  ;
+    SetQtClipboard(clipboard);
 #endif
 }
 

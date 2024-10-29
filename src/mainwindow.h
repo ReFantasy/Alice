@@ -7,6 +7,7 @@
 #include <QTextEdit>
 #include <qapplication.h>
 #include <qevent.h>
+#include <QFont>
 
 class EngineInterface;
 
@@ -26,5 +27,6 @@ private:
 private:
     QTextEdit *textEdit;
     QSettings *settings;
+    QFont font;
 };
 #endif // MAINWINDOW_H
