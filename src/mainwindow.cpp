@@ -21,10 +21,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     auto centralwidget = new QWidget(this);
     textEdit = new QTextEdit(centralwidget);
     textEdit->setReadOnly(true);
-    font = QFont("AR PL KaitiM GB Regular");
+    // font = QFont("AR PL KaitiM GB Regular");
     // QFontDialog fontDialog;
     // fontDialog.exec();;
-    textEdit->setFont(font);
+    // textEdit->setFont(font);
     auto layout = new QVBoxLayout(centralwidget);
     layout->addWidget(textEdit);
 
